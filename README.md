@@ -19,9 +19,11 @@ The pipe `|` deliminated output file contains the following fields:
 * `registrant_type` - The type of aircraft registration. One of the following values `Individual`, `Partnership`, `Corporation`, `Co-Owned`, `Government`, `LLC`, `Non Citizen Corporation`, `Non Citizen Co-Owned`, `Unknown`
 
 
+## Usage
+
 By default, the script will automatically download the FAA database zip file and create the ETC database file. Additionally, another URL to download the FAA database zip file can be provided. Alternatively, the two necessary files listed above can be provided directly.
 
-## Usage
+While not strictly required, `uv` is the simpliest way to run this script with the dependencies. Find out how to [Install uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 `uv run faa2etc.py faa.csv`
 
