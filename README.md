@@ -11,6 +11,7 @@ The pipe `|` deliminated output file contains the following fields:
 * `tail_number` - Identification number assigned to aircraft.
 * `make` - Name of the aircraft manufacturer.
 * `model` - Name of the aircraft model and series.
+* `aircraft_type` - The type of aircraft. One of the following: `Glider`, `Balloon`, `Blimp/Dirigible`, `Fixed wing single engine`, `Fixed wing multi engine`, `Rotorcraft`, `Weight-shift-control`, `Powered Parachute`, `Gyroplane`, `Hybrid Lift`, `Other`, `Unknown`
 * `year` - The year the aircraft was manufactured.
 * `owner_name` - The first registrant’s name which appears on the Application for Registration, AC Form 8050-1.
 * `city` - The city name which appears on the Application for Registration, AC Form 8050-1 or the latest address reported.

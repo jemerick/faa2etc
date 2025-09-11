@@ -27,6 +27,20 @@ TYPE_REGISTRATION_MAP = {
     "9": "Non Citizen Co-Owned",
 }
 
+AIRCRAFT_TYPE_MAP = {
+    "1": "Glider",
+    "2": "Balloon",
+    "3": "Blimp/Dirigible",
+    "4": "Fixed wing single engine",
+    "5": "Fixed wing multi engine",
+    "6": "Rotorcraft",
+    "7": "Weight-shift-control",
+    "8": "Powered Parachute",
+    "9": "Gyroplane",
+    "H": "Hybrid Lift",
+    "O": "Other",
+}
+
 
 def process_aircraft_reference_file(aircraft_reference_file_name) -> dict:
     """
@@ -40,9 +54,12 @@ def process_aircraft_reference_file(aircraft_reference_file_name) -> dict:
                 code = row["CODE"]
                 manufacturer = row["MFR"]
                 model = row["MODEL"]
+                aircraft_type_code = row["TYPE-ACFT"]
+                aircraft_type = AIRCRAFT_TYPE_MAP.get(aircraft_type_code) or "Unknown"
                 aircraft_reference[code] = {
                     "manufacturer": manufacturer.strip(),
                     "model": model.strip(),
+                    "aircraft_type": aircraft_type,
                 }
     return aircraft_reference
 
@@ -88,6 +105,7 @@ def create_emcomm_tools_file(aircraft_registrations, aircraft_reference, output_
         "tail_number",
         "make",
         "model",
+        "aircraft_type",
         "year",
         "owner_name",
         "city",
@@ -108,6 +126,8 @@ def create_emcomm_tools_file(aircraft_registrations, aircraft_reference, output_
             aircraft_registration["make"] = make
             model = aircraft_reference_data["model"] if aircraft_reference_data else "Unknown"
             aircraft_registration["model"] = model
+            aircraft_type = aircraft_reference_data["aircraft_type"] if aircraft_reference_data else "Unknown"
+            aircraft_registration["aircraft_type"] = aircraft_type
 
             writer.writerow(aircraft_registration)
 
