@@ -1,0 +1,37 @@
+name: Daily FAA update
+
+on:
+  schedule:
+    # 8 AM EST = 13:00 UTC
+    - cron: "0 13 * * *"
+  workflow_dispatch: # allows manual trigger too
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # needed to push changes back
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.17"
+
+      - name: Run Python script
+        run: uv run python your_script.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Daily update: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
