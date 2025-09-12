@@ -88,7 +88,7 @@ def process_aircraft_registration_file(aircraft_registration_file_name) -> list[
                 registration_data = {
                     "tail_number": tail_number.strip(),
                     "aircraft_reference_code": aircraft_reference_code.strip(),
-                    "year": year.strip(),
+                    "year": year.strip() or "-1",
                     "owner_name": owner_name.strip(),
                     "city": city.strip(),
                     "state": state.strip(),
